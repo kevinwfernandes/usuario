@@ -88,6 +88,20 @@ public class UsuarioConverter {
         return telefone.stream().map(this::paraTelefoneDTO).toList();
     }
 
+    public Usuario atualizaUsuario(Usuario usuario, UsuarioDTO usuarioDTO) {
+         return  usuario.builder()
+                 .nome(usuarioDTO.getNome() != null ? usuarioDTO.getNome() : usuario.getNome())
+                 .id(usuario.getId())
+                 .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : usuario.getEmail())
+                 .senha(usuarioDTO.getSenha() != null ? usuarioDTO.getSenha() : usuario.getSenha())
+                 .enderecos(usuario.getEnderecos())
+                 .telefones(usuario.getTelefones())
+                 .build();
+
+
+
+    }
+
 
 
 }
