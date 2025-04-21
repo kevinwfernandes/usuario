@@ -123,6 +123,32 @@ public class UsuarioService {
 
     }
 
+    //Método para cadastrar um telefone
+    public TelefoneDTO cadastraTelefone(String token, TelefoneDTO telefoneDTO){
+        // Extrai o email do token JWT
+        String email = jwtUtil.extractEmail(token.substring(7));
+        // Busca o usuário pelo email
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFounException("Usuário não encontrado "+email));
+
+        Telefone telefoneEntity = usuarioConverter.cadastraTelefone(telefoneDTO, usuario.getId());
+        // Salva o telefone
+        return usuarioConverter.paraTelefoneDTO(telefoneRepository.save(telefoneEntity));
+    }
+
+    //Método para cadastrar um endereço
+    public EnderecoDTO cadastraEndereco(String token, EnderecoDTO enderecoDTO){
+        // Extrai o email do token JWT
+        String email = jwtUtil.extractEmail(token.substring(7));
+        // Busca o usuário pelo email
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFounException("Usuário não encontrado "+email));
+
+        Endereco enderecoEntity = usuarioConverter.cadastraEndereco(enderecoDTO, usuario.getId());
+        // Salva o endereço
+        return usuarioConverter.paraEnderecoDTO(enderecoRepository.save(enderecoEntity));
+    }
+
 
 
 }
