@@ -1,5 +1,6 @@
 package dev.kevinwilliam.usuario.infrastructure.repository;
 
+import dev.kevinwilliam.usuario.infrastructure.entity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -7,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository  extends JpaRepository <UsuarioRepository, Long> {
+public interface UsuarioRepository  extends JpaRepository <Usuario, Long> {
 
      boolean existsByEmail(String email);
 
-     Optional<UsuarioRepository> findByEmail(String email);
+     Optional<Usuario> findByEmail(String email);
 
      @Transactional
      void deleteByEmail(String email);
